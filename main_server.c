@@ -1,6 +1,6 @@
 #include"add1.h"
-pthread_mutex_t mutex ;
-volatile sig_atomic_t stop;
+pthread_mutex_t* mutex ;
+
 bool stop_con =false;
 
 //signal func
@@ -31,8 +31,13 @@ void * handle_connection(void * p_client_socket){
         char dis[BUFFSIZE]={0};
         recv(client_socket,name,BUFFSIZE,0);///need to work with szie
         recv(client_socket,dis,BUFFSIZE,0);///need to work with szie
+        
+        pthread_mutex_lock(mutex);
         name2struct2file(name);
+        pthread_mutex_unlock(mutex);
+        
         new_task_folder(name,dis);
+        
         printf(" %s \t %s \n ",name,dis);
         break;    
     case 3:
@@ -90,22 +95,25 @@ int main(){
 server_begin_function();
 //the loop
     
+    pthread_t t1[10];
     while (!stop_con)
     {
+        int i=0;
         //connecting
         fprintf(stdout,"whaiting to connect \n");
         check(client_socket=accept(server_socket,NULL,NULL)
         ,"failed to accept\n");
-        if(stop==1)
-            break;
+        
         
         //trading
+
         void *p_client_socket=(void*)&client_socket;
-        pthread_t t;
-        pthread_create(&t,NULL,handle_connection,p_client_socket);
+        pthread_create(&t1[i],NULL,handle_connection,p_client_socket);
+        i++;
         //usleep(4000000);
     }
     //after loop
+    ///pthread_join(t1,NULL);
     printf("good bay ,server go to sleep \n");
     close(server_socket);
     

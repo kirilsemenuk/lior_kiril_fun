@@ -97,9 +97,9 @@ int new_task_folder(char* name,char* dis){
 int is_name_exist(char* name){
 
     struct task_linkedlist *alltsk=file2ll();
-    //struct task_linkedlist *head;
+    struct task_linkedlist *head=alltsk;
     //head=alltsk;
-
+    int lior=0;
     while(alltsk!=NULL)
     {   
         printf("%s!=%s\n",name,alltsk->x.name);
@@ -107,12 +107,22 @@ int is_name_exist(char* name){
         if(strcmp(name,alltsk->x.name)==0)
             {
                 printf("exist\n");
-                return 1;
+                lior=1;
+                break;
             }
         alltsk=alltsk->next;
     }
-    printf("not exist\n");
-    return 0;
+    if(lior==0)
+        printf("not exist\n");
+    struct task_linkedlist *temp;
+    alltsk=head;
+    while (alltsk!=NULL)
+    {   temp=alltsk;
+        alltsk=alltsk->next;
+        free(temp);//-----
+    }
+    
+    return lior;
 }
 struct task_linkedlist* file2ll(){
     FILE *f1=fopen("DataBase/task.bin","rb");
@@ -121,12 +131,12 @@ struct task_linkedlist* file2ll(){
         return NULL;
     }
     struct task_linkedlist *head=malloc(sizeof(struct task_linkedlist));
-
+    
     struct task_linkedlist *temp=head;
 
     while (fread(&head->x,sizeof(struct task),1,f1)==1)
     {
-        printf("%s\n",head->x.name);
+        
        
         head->next=malloc(sizeof(struct task_linkedlist));
         head=head->next;
