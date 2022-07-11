@@ -31,7 +31,7 @@ void * handle_connection(void * p_client_socket){
         char dis[BUFFSIZE]={0};
         recv(client_socket,name,BUFFSIZE,0);///need to work with szie
         recv(client_socket,dis,BUFFSIZE,0);///need to work with szie
-
+        name2struct2file(name);
         new_task_folder(name,dis);
         printf(" %s \t %s \n ",name,dis);
         break;    

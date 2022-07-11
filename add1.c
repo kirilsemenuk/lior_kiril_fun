@@ -93,3 +93,62 @@ int new_task_folder(char* name,char* dis){
     
     return 0;
 }
+
+int is_name_exist(char* name){
+
+    struct task_linkedlist *alltsk=file2ll();
+    //struct task_linkedlist *head;
+    //head=alltsk;
+
+    while(alltsk!=NULL)
+    {   
+        printf("%s!=%s\n",name,alltsk->x.name);
+        //printf(typeof)
+        if(strcmp(name,alltsk->x.name)==0)
+            {
+                printf("exist\n");
+                return 1;
+            }
+        alltsk=alltsk->next;
+    }
+    printf("not exist\n");
+    return 0;
+}
+struct task_linkedlist* file2ll(){
+    FILE *f1=fopen("DataBase/task.bin","rb");
+    if(f1==NULL){
+        printf("fille didn't opend!!!!\n");
+        return NULL;
+    }
+    struct task_linkedlist *head=malloc(sizeof(struct task_linkedlist));
+
+    struct task_linkedlist *temp=head;
+
+    while (fread(&head->x,sizeof(struct task),1,f1)==1)
+    {
+        printf("%s\n",head->x.name);
+       
+        head->next=malloc(sizeof(struct task_linkedlist));
+        head=head->next;
+        head->next=NULL;
+        }
+    
+
+
+    return temp;
+}
+
+int name2struct2file(char* name){
+ 
+    if(is_name_exist(name))//lior freee the ll
+        return 1;
+
+    struct task t1;
+    sprintf(t1.name,"%s",name);
+    t1.start_time=time(NULL);
+    t1.end_time=0;
+    FILE* f1=fopen("DataBase/task.bin","ab");//errno cheack
+    fwrite(&t1,1,sizeof(struct task),f1);
+    fclose(f1);
+    return 0;
+}

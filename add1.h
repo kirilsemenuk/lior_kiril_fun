@@ -26,7 +26,7 @@ struct task
 struct task_linkedlist
 {
     struct task x;
-    struct task * next;
+    struct task_linkedlist * next;
 }task_linkedlist;
 
 
@@ -44,3 +44,5 @@ int send_name_and_discription(int sock,char * name ,char *dis);
 int get_name_and_discription(int sock,char * name ,char *dis);
 int name2struct2file(char* name);
 int new_task_folder(char* name,char* dis);
+int is_name_exist(char* name);
+struct task_linkedlist* file2ll();
