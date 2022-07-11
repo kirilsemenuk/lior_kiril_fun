@@ -21,10 +21,19 @@ void * handle_connection(void * p_client_socket){
     case 1:
         /* display a task */
         fprintf(stdout,"/* display a task */");
+        
+        
         break;
     case 2:
         /* add a task */
          fprintf(stdout,"/* add a task */");
+        char name[BUFFSIZE];
+        char dis[BUFFSIZE];
+        recv(client_socket,name,BUFFSIZE,0);///need to work with szie
+        recv(client_socket,dis,BUFFSIZE,0);///need to work with szie
+
+        
+        printf(" %s \t %s \n ",name,dis);
         break;    
     case 3:
         /* add file to task */
@@ -47,7 +56,7 @@ void * handle_connection(void * p_client_socket){
     }
 
 
-    fprintf(stdout,"connection end \n");
+    fprintf(stdout,"\nconnection end \n");
 
     close(client_socket);
     return NULL;

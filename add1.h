@@ -40,3 +40,6 @@ void check(int a,char * mess);
 int get_mode_from_client(int sock);
 int server_begin_function();//create loge file ,and data base folder
 //int requast_to_add_new_task ;
+int send_name_and_discription(int sock,char * name ,char *dis);
+int get_name_and_discription(int sock,char * name ,char *dis);
+int name2struct2file(char* name);

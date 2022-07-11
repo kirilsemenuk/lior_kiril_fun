@@ -50,3 +50,25 @@ int server_begin_function(){
     return 0;
 
 }
+int send_name_and_discription(int sock,char * name ,char *dis){
+    char buff[BUFFSIZE];
+    strcpy(buff,name);
+    send(sock,buff,BUFFSIZE,0);
+    fprintf(stdout,"h1\n");
+    strcpy(buff,dis);
+    send(sock,buff,BUFFSIZE,0);
+    fprintf(stdout,"h2\n");
+    return 0;
+}
+
+
+int get_name_and_discription(int sock,char* name ,char * dis){
+    char buff[BUFFSIZE];
+    recv(sock,buff,BUFFSIZE,0);////need to work with the size
+    strcpy(name,buff);
+    recv(sock,buff,BUFFSIZE,0);
+    strcpy(dis,buff);
+
+
+    return 0;
+}

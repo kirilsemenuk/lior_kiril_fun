@@ -36,6 +36,7 @@ case 2:
     /* add a task */
     fprintf(stdout,"/* add a task */");
     send(sock,"02",MODESIZE,0);
+    send_name_and_discription(sock,argv[2],argv[3]);
     break;
 
 case 3:
