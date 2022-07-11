@@ -27,12 +27,12 @@ void * handle_connection(void * p_client_socket){
     case 2:
         /* add a task */
          fprintf(stdout,"/* add a task */");
-        char name[BUFFSIZE];
-        char dis[BUFFSIZE];
+        char name[BUFFSIZE]={0};
+        char dis[BUFFSIZE]={0};
         recv(client_socket,name,BUFFSIZE,0);///need to work with szie
         recv(client_socket,dis,BUFFSIZE,0);///need to work with szie
 
-        
+        new_task_folder(name,dis);
         printf(" %s \t %s \n ",name,dis);
         break;    
     case 3:

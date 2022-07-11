@@ -43,3 +43,4 @@ int server_begin_function();//create loge file ,and data base folder
 int send_name_and_discription(int sock,char * name ,char *dis);
 int get_name_and_discription(int sock,char * name ,char *dis);
 int name2struct2file(char* name);
+int new_task_folder(char* name,char* dis);
