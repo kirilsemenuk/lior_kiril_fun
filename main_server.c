@@ -1,5 +1,5 @@
 #include"add1.h"
-pthread_mutex_t* mutex ;
+
 
 bool stop_con =false;
 
@@ -32,11 +32,11 @@ void * handle_connection(void * p_client_socket){
         recv(client_socket,name,BUFFSIZE,0);///need to work with szie
         recv(client_socket,dis,BUFFSIZE,0);///need to work with szie
         
-        pthread_mutex_lock(mutex);
+        pthread_mutex_lock(&mutex);
         name2struct2file(name);
-        pthread_mutex_unlock(mutex);
         
         new_task_folder(name,dis);
+        pthread_mutex_unlock(&mutex);
         
         printf(" %s \t %s \n ",name,dis);
         break;    
@@ -47,6 +47,8 @@ void * handle_connection(void * p_client_socket){
     case 4:
         /* finsh an task */
          fprintf(stdout,"/* display a task */");
+         ///cheack if task exsist 
+         //cenge end time
         break;
     case 5:
         /*  get an task */

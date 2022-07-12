@@ -73,19 +73,21 @@ int get_name_and_discription(int sock,char* name ,char * dis){
     return 0;
 }
 int new_task_folder(char* name,char* dis){
-    char buff[25];
+    char buff[50];
     sprintf(buff,"./DataBase/%s",name);
     puts("hello\n");
     if(mkdir(buff,0777)==-1){
     perror("Error");
     return 1;
     }
-    puts("hello2\n");
-    chdir(buff);
-    FILE* f1=fopen("README.txt","w");
+  //  puts("hello2\n");
+    //chdir(buff);
+    sprintf(buff,"./DataBase/%s/README.txt",name);
+    FILE* f1=fopen(buff,"w");
+    if(f1==NULL)return 1;
     fprintf(f1,"%s:\t%s \n---------------------------------------\n",__DATE__,dis);
     fclose(f1);
-    chdir("/..");
+    ///chdir("/..");
     
     
     
@@ -157,7 +159,11 @@ int name2struct2file(char* name){
     sprintf(t1.name,"%s",name);
     t1.start_time=time(NULL);
     t1.end_time=0;
+   // pthread_mutex_lock(&mutex);
     FILE* f1=fopen("DataBase/task.bin","ab");//errno cheack
+   /// pthread_mutex_unlock(&mutex);
+    if(f1==NULL)
+        return -1;
     fwrite(&t1,1,sizeof(struct task),f1);
     fclose(f1);
     return 0;

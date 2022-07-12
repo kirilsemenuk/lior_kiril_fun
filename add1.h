@@ -16,6 +16,9 @@
 #include<time.h>
 #define BUFFSIZE 1024
 
+
+pthread_mutex_t mutex ; 
+
 typedef enum { false, true } bool;
 struct task
 {
