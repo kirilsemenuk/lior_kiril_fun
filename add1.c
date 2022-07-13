@@ -35,6 +35,10 @@ int arg_to_int(char* word){
     {
        return 5;
     }
+    else if (strcmp(word,"-xxx")==0)
+    {
+       return 6;
+    }
     else
          return -1;
 }

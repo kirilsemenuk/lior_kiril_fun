@@ -38,7 +38,7 @@ void * handle_connection(void * p_client_socket){
         new_task_folder(name,dis);
         pthread_mutex_unlock(&mutex);
         
-        printf(" %s \t %s \n ",name,dis);
+        //printf(" %s \t %s \n ",name,dis);
         break;    
     case 3:
         /* add file to task */
@@ -57,6 +57,8 @@ void * handle_connection(void * p_client_socket){
     case 6:
         /*   close the server */
          fprintf(stdout,"/ /*   close the server */");
+         kill(getppid(),SIGUSR2);
+
         break;          
     default:
         break;
