@@ -3,6 +3,7 @@
 
 #include"02_add.h"
 #include"03_add.h"
+#include"04_add.h"
 
 bool stop_con =false;
 int main(int argc ,char *argv[]){
@@ -25,6 +26,7 @@ int main(int argc ,char *argv[]){
    
    
 //-------------------------------------------------------------------------------------------------------------------------------------
+char buff3[254];
 if(argc !=1)
      MOOD=arg_to_int(argv[1]);
 else   
@@ -35,6 +37,10 @@ case 1:
     /* display a task */
     fprintf(stdout,"/* display a task */");
     send(sock,"01",MODESIZE,0);
+    send_name(sock,argv[2]);
+    recv(sock,buff3,254,0);
+    printf("%s\n",buff3);
+
     break;
 
 case 2:
@@ -59,7 +65,11 @@ case 3:
 case 4:
     /* finsh an task */
     fprintf(stdout,"/* finsh an task */");
+    char buff2[254];
     send(sock,"04",MODESIZE,0);
+    send_name(sock,argv[2]);
+    recv(sock,buff2,254,0);
+    puts(buff2);
     //sent task name
     break;
 
@@ -80,6 +90,7 @@ default:
     /*display alll*/
     fprintf(stdout,"/* display all task's */");
     send(sock,"00",MODESIZE,0);
+    CprintAll(sock);
     break;
 }
 

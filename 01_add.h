@@ -6,18 +6,6 @@
 
 pthread_mutex_t mutex ; 
 
-typedef enum { false, true } bool;
-struct task
-{
-    char name[25];
-    time_t start_time;
-    time_t end_time;
-}task;
-struct task_linkedlist
-{
-    struct task x;
-    struct task_linkedlist * next;
-}task_linkedlist;
 
 
 #include <unistd.h>

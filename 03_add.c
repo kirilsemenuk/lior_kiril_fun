@@ -18,11 +18,13 @@ int send_full_task(int soc){
         ;
     }else
         return 0 ;
+        char buff2[20];
     struct dirent * entry;
     while ((entry = readdir(d)) != NULL) {
-    if (strcmp(entry->d_name,".")==0||strcmp(entry->d_name,"..")==0) 
+        sprintf(buff2,"%s",entry->d_name);
+    if (strcmp(buff2,".")==0||strcmp(buff2,"..")==0) 
         continue;
-        send_one_file(soc,entry->d_name);
+        send_one_file(soc,buff2);
         
     }
 

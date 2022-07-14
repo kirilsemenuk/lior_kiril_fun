@@ -3,6 +3,7 @@
 
 #include"02_add.h"
 #include"03_add.h"
+#include"04_add.h"
 
 
 bool stop_con =false;
@@ -25,7 +26,11 @@ void * handle_connection(void * p_client_socket){
     case 1:
         /* display a task */
         fprintf(stdout,"/* display a task */");
-        
+        char tname[BUFFSIZE]={0};
+        read(client_socket,tname,BUFFSIZE);
+        pthread_mutex_lock(&mutex);
+        print1task(client_socket,tname);
+        pthread_mutex_unlock(&mutex);
         
         break;
     case 2:
@@ -56,6 +61,11 @@ void * handle_connection(void * p_client_socket){
          fprintf(stdout,"/* display a task */");
          ///cheack if task exsist 
          //cenge end time
+        char end_task[BUFFSIZE]={0};
+        recv(client_socket,end_task,BUFFSIZE,0); 
+        pthread_mutex_lock(&mutex); 
+        end_tasck(end_task,client_socket);
+        pthread_mutex_unlock(&mutex);
         break;
     case 5:
         /*  get an task */
@@ -69,6 +79,10 @@ void * handle_connection(void * p_client_socket){
 
         break;          
     default:
+        pthread_mutex_lock(&mutex);
+        printAll(client_socket);
+        pthread_mutex_unlock(&mutex);
+
         break;
     }
 
