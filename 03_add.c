@@ -132,7 +132,7 @@ int get_one_file(int soc){
     recv(soc,&filesize,sizeof(int),0);
  
 
-    int fd=open(buff,O_RDWR,(mode_t)0600);
+    int fd=open(buff,O_RDWR|O_CREAT,(mode_t)0600);
 
     if(!fd){
 
