@@ -1,4 +1,8 @@
-#include"add1.h"
+#include"superheader.h"
+#include"01_add.h"
+
+#include"02_add.h"
+#include"03_add.h"
 
 
 bool stop_con =false;
@@ -43,6 +47,9 @@ void * handle_connection(void * p_client_socket){
     case 3:
         /* add file to task */
          fprintf(stdout,"/* add file to task */");
+         get_file(client_socket);
+
+         
         break;
     case 4:
         /* finsh an task */
@@ -53,6 +60,7 @@ void * handle_connection(void * p_client_socket){
     case 5:
         /*  get an task */
          fprintf(stdout," /* finsh an task */");
+         send_full_task(client_socket);
         break;  
     case 6:
         /*   close the server */

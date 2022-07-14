@@ -1,20 +1,7 @@
-#include<stdio.h>
-#include<time.h>
-#include<stdlib.h>
-#include<string.h>
-#include<dirent.h>
-#include<sys/stat.h>
-#include<sys/types.h>
-#include<sys/socket.h>
-#include<fcntl.h>
-#include<netinet/in.h>
-#include<sys/mman.h>
-#include<pthread.h>
-#include<signal.h>
-#include"string.h"
-#include<errno.h>
-#include<time.h>
-#define BUFFSIZE 1024
+#ifndef HEADER_FILE1
+#define HEADER_FILE1
+
+#include"superheader.h"
 
 
 pthread_mutex_t mutex ; 
@@ -49,3 +36,6 @@ int name2struct2file(char* name);
 int new_task_folder(char* name,char* dis);
 int is_name_exist(char* name);
 struct task_linkedlist* file2ll();
+
+
+#endif

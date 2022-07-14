@@ -1,4 +1,9 @@
-#include"add1.h"
+#include"superheader.h"
+#include"01_add.h"
+
+#include"02_add.h"
+#include"03_add.h"
+
 bool stop_con =false;
 int main(int argc ,char *argv[]){
 
@@ -43,6 +48,12 @@ case 3:
     /* add file to task */
     fprintf(stdout,"/* add file to task */");
     send(sock,"03",MODESIZE,0);
+    map_and_send(sock,argv[3],argv[2]);
+
+
+
+    
+   
     break;
 
 case 4:
@@ -57,6 +68,7 @@ case 5:
     /* get an task */
     fprintf(stdout,"/* get a task */");
     send(sock,"05",MODESIZE,0);
+    get_full_task(sock,argv[2]);
     break;
  case 6:
     /* close the server */

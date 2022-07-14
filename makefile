@@ -1,3 +1,3 @@
-all:clienet.c add1.c main_server.c
-	gcc -g clienet.c add1.c -lpthread -o cli
-	gcc -g main_server.c add1.c -lpthread -o serv
+all:clienet.c 02_add.c 01_add.c 03_add.c main_server.c
+	gcc -g3 clienet.c 02_add.c 01_add.c 03_add.c -lpthread -o cli
+	gcc -g3 main_server.c 02_add.c 01_add.c 03_add.c -lpthread -o serv
