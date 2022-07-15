@@ -51,8 +51,10 @@ void * handle_connection(void * p_client_socket){
         break;    
     case 3:
         /* add file to task */
+         pthread_mutex_lock(&mutex); 
          fprintf(stdout,"/* add file to task */");
          get_file(client_socket);
+         pthread_mutex_unlock(&mutex);
 
          
         break;
@@ -69,8 +71,10 @@ void * handle_connection(void * p_client_socket){
         break;
     case 5:
         /*  get an task */
+         pthread_mutex_lock(&mutex); 
          fprintf(stdout," /* finsh an task */");
          send_full_task(client_socket);
+         pthread_mutex_unlock(&mutex);
         break;  
     case 6:
         /*   close the server */
