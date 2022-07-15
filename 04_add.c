@@ -30,7 +30,7 @@ int end_tasck(char * name,int client_socket)
             alltsk->x.end_time=time(NULL);
             sprintf( buff,"task: %s\n\t number of sec:%ld\n",alltsk->x.name,alltsk->x.end_time-alltsk->x.start_time);
             send(client_socket,buff,254,0);
-            break;;
+            break;
         }
         i++;
         alltsk=alltsk->next;
